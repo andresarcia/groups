@@ -1,0 +1,13 @@
+INCLUDES= 	-I$(TOP)/src/groups/include\
+	    -I$(TOP)/src/Binder/include\
+		-I$(TOP)/src/aleph\
+		-I$(TOP)/src -I/usr/local/include
+
+LIBALEPH=	$(TOP)/src/lib 
+
+OBJS_FOR_BROADCAST_DAEMON = broadcast_daemon.o timeoutQueue.o broadcast_pars.o
+
+SRCS = 		timeoutQueue.C\
+		broadcast_daemon.C\
+		broadcast_pars.C\
+		test_broadcast_client.C

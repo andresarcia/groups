@@ -1,0 +1,11 @@
+
+# define IHaveSubdirs
+# define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+
+SUBDIRS = 	include tests
+
+MakeSubdirs($(SUBDIRS))
+
+DependSubdirs($(SUBDIRS))
+
+

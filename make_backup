@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# day=`date | sed  -e s/" "/-/g -e s/":"/-/g`
+
+day=`date +%a-%d-%B-%Y__at_%l_%M_%p | sed s/" "/_/g `
+
+file_name=Groups-$day.tar
+
+echo $file_name
+
+tar -cvf $file_name `find . -name "*.[hcHC]"`
+tar -rvf $file_name `find . -name Imakefile`
+tar -rvf $file_name `find . -name srcDefs`
+tar -rvf $file_name `find . -name tgtDefs`
+tar -rvf $file_name make_backup
+
+bzip2 -9 $file_name
+
+cp $file_name.bz2 ~Aleph/src/groups/BACKUPS
+cp $file_name.bz2 /home_thompsom/amoret_backups/Thesis/PROGRAMS_BACKUP

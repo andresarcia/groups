@@ -1,0 +1,27 @@
+OPTIONS=        -g -O2
+
+DEFINES= 	$(OPTIONS) -Wall -Wshadow -Wtraditional\
+		-Wmissing-prototypes -Wmissing-declarations -Wcast-align 
+
+# include "../srcDefs"
+
+
+LOCALLIBS=	$(TOP)/src/aleph/libipc.a $(TOP)/src/lib/libAleph.a  
+
+SYSLIBS=	-lnana -lstdc++ -ldmallocth -lpthread -lc
+
+DEPLIBS= 	$(TOP)/src/lib/libAleph.a 
+
+CLIENT_LIBS = $(TOP)/src/lib/libAleph_d.a 
+
+CONTAINER_LIBS = $(TOP)/src/aleph/libipc.a $(TOP)/src/lib/libAleph.a 
+
+NormalLibraryObjectRule()
+
+AllTarget(broadcast_daemon)
+NormalProgramTarget(broadcast_daemon, $(OBJS_FOR_BROADCAST_DAEMON),$(LOCALLIBS),$(CONTAINER_LIBS),$(SYSLIBS))
+
+AllTarget(test_broadcast_client)
+NormalProgramTarget(test_broadcast_client, test_broadcast_client.o,$(LOCALLIBS) $(GROUP_CLIENT_LIB),$(CONTAINER_LIBS),$(SYSLIBS))
+
+DependTarget()

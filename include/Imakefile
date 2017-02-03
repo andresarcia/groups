@@ -1,0 +1,29 @@
+# define IHaveSubdirs
+# define PassCDebugFlags  'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+
+SUBDIRS=        unshared debugger
+
+# include "srcDefs"
+
+AllTarget(links)
+
+MakeSubdirs($(SUBDIRS))
+
+DependSubdirs($(SUBDIRS))
+
+links::
+	for i in $(SUBDIRS) ;	\		@@\
+	do						\		@@\
+	cd $$i;					\		@@\
+	for f in $(SRCS);		\		@@\
+	do						\		@@\
+	$(RM) $$f;				\		@@\
+	$(LN) ../$$f $$f;		\		@@\
+	done;					\		@@\
+	cd ..;					\		@@\
+	done
+
+install:: links
+
+Makefiles:: links
+
